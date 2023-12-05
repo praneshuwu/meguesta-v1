@@ -6,7 +6,12 @@ module.exports = {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
         port: '',
-        pathname: '/my-account/**',
+        pathname: '/dfhosctbr/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        port: '',
       },
     ],
   },

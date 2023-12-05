@@ -6,17 +6,17 @@ import { useLastViewedPhoto } from '../utils/useLastViewedPhoto'
 import SharedModal from './SharedModal'
 
 export default function Carousel({
-  index,
   currentPhoto,
+  index,
 }: {
-  index: number
   currentPhoto: ImageProps
+  index: number
 }) {
   const router = useRouter()
-  const [, setLastViewedPhoto] = useLastViewedPhoto()
+  const [lastViewedPhoto , setLastViewedPhoto] = useLastViewedPhoto();
 
   function closeModal() {
-    setLastViewedPhoto(currentPhoto.id)
+    setLastViewedPhoto(currentPhoto?.id)
     router.push('/', undefined, { shallow: true })
   }
 
@@ -28,6 +28,8 @@ export default function Carousel({
     closeModal()
   })
 
+  console.log(currentPhoto);
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center">
       <button
@@ -35,7 +37,7 @@ export default function Carousel({
         onClick={closeModal}
       >
         <Image
-          src={currentPhoto.blurDataUrl}
+          src={currentPhoto?.imgUrl}
           className="pointer-events-none h-full w-full"
           alt="blurred background"
           fill

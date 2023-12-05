@@ -6,14 +6,34 @@ import getResults from '../../utils/cachedImages'
 import cloudinary from '../../utils/cloudinary'
 import getBase64ImageUrl from '../../utils/generateBlurPlaceholder'
 import type { ImageProps } from '../../utils/types'
+import { use, useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 
 const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
   const router = useRouter()
   const { photoId } = router.query
   let index = Number(photoId)
+  // const [currentPhoto,setCurrentPhoto] = useState();
+  const params = useParams()
 
-  const currentPhotoUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_2560/${currentPhoto.public_id}.${currentPhoto.format}`
+  useEffect(()=>{
+    const getCurrentPhoto = async ()=>{
+      const results = await getResults();
+      const fetchedCurrentPhoto = results?.find(
+        (img) => img.id === Number(params.id)
+      )
+      console.log(results);
+      // currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto)
+    }
 
+    getCurrentPhoto();
+  
+  },[])
+
+  const currentPhotoUrl = currentPhoto.imgUrl;
+
+  console.log(currentPhoto);
+  
   return (
     <>
       <Head>
@@ -31,24 +51,26 @@ const Home: NextPage = ({ currentPhoto }: { currentPhoto: ImageProps }) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const results = await getResults()
+  const results = await getResults();
+
+  console.log([results]);
+  
 
   let reducedResults: ImageProps[] = []
   let i = 0
   for (let result of results.resources) {
     reducedResults.push({
       id: i,
-      height: result.height,
-      width: result.width,
-      public_id: result.public_id,
-      format: result.format,
+      imgUrl: result.imgUrl
     })
     i++
   }
 
   const currentPhoto = reducedResults.find(
     (img) => img.id === Number(context.params.photoId)
-  )
+  );
+  console.log(currentPhoto);
+  
   currentPhoto.blurDataUrl = await getBase64ImageUrl(currentPhoto)
 
   return {
@@ -59,14 +81,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 }
 
 export async function getStaticPaths() {
-  const results = await cloudinary.v2.search
-    .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-    .sort_by('public_id', 'desc')
-    .max_results(400)
-    .execute()
+  const results = await getResults();
 
   let fullPaths = []
-  for (let i = 0; i < results.resources.length; i++) {
+  for (let i = 0; i < results.length; i++) {
     fullPaths.push({ params: { photoId: i.toString() } })
   }
 

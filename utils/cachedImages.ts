@@ -1,17 +1,25 @@
-import cloudinary from './cloudinary'
+import { ref, listAll, getDownloadURL } from 'firebase/storage';
+import { firebaseDB } from './firebase';
 
-let cachedResults
+let cachedResults;
+let fetchedResults = [];
 
 export default async function getResults() {
   if (!cachedResults) {
-    const fetchedResults = await cloudinary.v2.search
-      .expression(`folder:${process.env.CLOUDINARY_FOLDER}/*`)
-      .sort_by('public_id', 'desc')
-      .max_results(400)
-      .execute()
+    const imageListRef = ref(firebaseDB, 'guests/uploads');
+    const response = await listAll(imageListRef);
+    let id = 0;
+    response.items.forEach(async (item, index) => {
+      const imgUrl = await getDownloadURL(item);
+      fetchedResults.push([{ id, imgUrl }]);
+      id++;
+      
+    });
 
-    cachedResults = fetchedResults
+    cachedResults = fetchedResults;
   }
 
-  return cachedResults
+  console.log(cachedResults);
+  
+  return cachedResults;
 }
