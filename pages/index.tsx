@@ -85,9 +85,9 @@ const Home: NextPage = () => {
               return new Date(b.date) - new Date(a.date);
             }
           ).map(({ id, imgUrl }) => (
-            <div key={id} className="after:content group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight">
+            <div key={id} className="after:content group relative mb-5 block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight">
               <Image
-                alt="Next.js Conf photo"
+                alt={`Photo taken at ${new Date(id)}`}
                 className="transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110"
                 style={{ transform: 'translate3d(0, 0, 0)' }}
                 // placeholder="blur"
@@ -105,7 +105,7 @@ const Home: NextPage = () => {
         </div>
       </main>
       <footer className="p-6 text-center text-white/80 sm:p-12">
-       Made with ❤️ by <a href="https://x.com/krishna_pranesh">Pranesh R</a>
+       Made with ❤️ by <a href="https://www.instagram.com/pranesh.uwu/" className='font-bold underline'>Pranesh R</a>
       </footer>
     </>
   );
