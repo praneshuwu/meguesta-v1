@@ -7,3 +7,31 @@
     clip-path: inset(0.6px);
   }
 }
+
+.fade-out{
+  opacity:0;
+  transition:opacity 0.5s;
+
+}
+.fade-in{
+  opacity:1;
+  transition: opacity 0.5s 0.5s;
+}
+
+.gradient-background {
+  background: linear-gradient(314deg,#606060,#212112,#000000,#4e4e4e,#102d10);
+  background-size: 200% 200%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

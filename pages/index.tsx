@@ -68,15 +68,14 @@ const Home: NextPage = () => {
         )} */}
 
         <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-          <div className="after:content relative mb-5 flex h-[500px] flex-col items-center justify-end gap-4 overflow-hidden rounded-lg bg-white/10 px-6 pb-16 pt-16 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
-            <h1 className="mt-8 mb-4 text-base font-bold uppercase tracking-widest">
+          <div className="after:content relative mb-5 flex flex-col items-center justify-end gap-4 overflow-hidden rounded-lg gradient-background px-6 pb-16 pt-10 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
+            <h1 className="mb-4 text-base font-bold uppercase tracking-widest">
               Meguesta
             </h1>
             <p className="max-w-[40ch] text-white/75 sm:max-w-[32ch] mb-3">
               Upload your memories from the event and let us cherish the moments you captured
             </p>
             <CustomFileInput />
-
           </div>
 
           {images.sort(
@@ -88,7 +87,7 @@ const Home: NextPage = () => {
             <div key={id} className="after:content group relative mb-5 block w-full after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight">
               <Image
                 alt={`Photo taken at ${new Date(id)}`}
-                className="transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110"
+                className="transform rounded-lg brightness-100 transition will-change-auto group-hover:brightness-110 border border-gray-300"
                 style={{ transform: 'translate3d(0, 0, 0)' }}
                 // placeholder="blur"
                 // blurDataURL={blurDataUrl}
