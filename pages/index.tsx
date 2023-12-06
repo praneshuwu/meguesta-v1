@@ -68,7 +68,7 @@ const Home: NextPage = () => {
         )} */}
 
         <div className="columns-1 gap-4 sm:columns-2 xl:columns-3 2xl:columns-4">
-          <div className="after:content relative mb-5 flex flex-col items-center justify-end gap-4 overflow-hidden rounded-lg gradient-background px-6 pb-16 pt-10 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight lg:pt-0">
+          <div className="after:content relative mb-5 flex flex-col items-center justify-end gap-4 overflow-hidden rounded-lg gradient-background px-6 pb-16 pt-10 text-center text-white shadow-highlight after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight">
             <h1 className="mb-4 text-base font-bold uppercase tracking-widest">
               Meguesta
             </h1>
